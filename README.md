@@ -1,6 +1,6 @@
-# Base Python Template
+# AES Encryption
 
-A template of README best practices to make your README simple to understand and easy to use.
+A python aes encryption library
 
 ## Table of Contents
 
@@ -11,32 +11,29 @@ A template of README best practices to make your README simple to understand and
 
 ## Installation
 
-Download to your project directory, add `README.md`, and commit:
+Install using pip
 
 ```sh
-curl -LO http://git.io/Xy0Chg
-git add README.md
-git commit -m "Use README Boilerplate"
+pip install aes-encryption
 ```
 
 ## Usage
 
-Replace the contents of `README.md` with your project's:
+```python
+from aes_encryption import AESCipher
 
-- Name
-- Description
-- Installation instructions
-- Usage instructions
-- Support instructions
-- Contributing instructions
-- License
+encryption_key: str = 'secret key'
+cipher: AESCipher = AESCipher(encryption_key)  # this initializes the cipher with an encryption key
+message: str = 'secret message'
+encrypted: str = cipher.encrypt(message)  # this is how you encrypt your message
+decrypted: str = cipher.decrypt(encrypted)  # this is how you decrypt your message
+```
 
-Feel free to remove any sections that aren't applicable to your project.
 
 ## Support
 
-Please [open an issue](https://github.com/fraction/readme-boilerplate/issues/new) for support.
+Please [open an issue](https://github.com/apinanyogaratnam/aes-encryption/issues/new) for support.
 
 ## Contributing
 
-Please contribute using [Github Flow](https://guides.github.com/introduction/flow/). Create a branch, add commits, and [open a pull request](https://github.com/fraction/readme-boilerplate/compare/).
+Please contribute using [Github Flow](https://guides.github.com/introduction/flow/). Create a branch, add commits, and [open a pull request](https://github.com/apinanyogaratnam/aes-encryption/compare/).
