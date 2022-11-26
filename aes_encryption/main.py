@@ -12,13 +12,13 @@ class AESCipher(object):
         raw = self._pad(raw)
         iv = Random.new().read(AES.block_size)
         cipher = AES.new(self.key, AES.MODE_CBC, iv)
-        return base64.b64encode(iv + cipher.encrypt(raw.encode())).decode()
+        return base64.b64encode(iv + cipher.encrypt(raw.encode())).decode('utf-8')
 
     def decrypt(self: 'AESCipher', enc: bytes) -> str:
         enc = base64.b64decode(enc)
         iv = enc[:AES.block_size]
         cipher = AES.new(self.key, AES.MODE_CBC, iv)
-        return self._unpad(cipher.decrypt(enc[AES.block_size:])).decode('utf-8')
+        return self._unpad(cipher.decrypt(enc[AES.block_size:]))
 
     def _pad(self: 'AESCipher', s: str) -> str:
         return s + (self.bs - len(s) % self.bs) * chr(self.bs - len(s) % self.bs)
