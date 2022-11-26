@@ -1,6 +1,5 @@
 import base64
 import hashlib
-
 from Crypto import Random
 from Crypto.Cipher import AES
 
@@ -33,6 +32,6 @@ class AESCipher(object):
 if __name__ == "__main__":
     cipher = AESCipher("secret key")
     encrypted = cipher.encrypt("secret message")
-    decrypted = cipher.decrypt(encrypted)
+decrypted = cipher.decrypt(encrypted)
     print(encrypted)
     print(decrypted)
