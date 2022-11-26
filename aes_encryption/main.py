@@ -26,3 +26,10 @@ class AESCipher(object):
     @staticmethod
     def _unpad(s: str) -> str:
         return s[:-ord(s[len(s)-1:])]
+
+if __name__ == '__main__':
+    cipher = AESCipher('secret key')
+    encrypted = cipher.encrypt('secret message')
+    decrypted = cipher.decrypt(encrypted)
+    print(encrypted)
+    print(decrypted)
