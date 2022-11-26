@@ -1,0 +1,11 @@
+*.log
+.env.local
+*.env
+.env.production
+venv
+volumes
+__pycache__
+.DS_Store
+build
+dist
+*.egg-info
