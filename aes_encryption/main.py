@@ -27,6 +27,7 @@ class AESCipher(object):
     def _unpad(s: str) -> str:
         return s[:-ord(s[len(s)-1:])]
 
+
 if __name__ == '__main__':
     cipher = AESCipher('secret key')
     encrypted = cipher.encrypt('secret message')
