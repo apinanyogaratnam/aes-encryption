@@ -1,34 +1,35 @@
 import base64
 import hashlib
-from Cryptodome.Cipher import AES
-from Cryptodome.Random import get_random_bytes
+from Crypto import Random
+from Crypto.Cipher import AES
 
-__key__ = hashlib.sha256(b'16-character key').digest()
+class AESCipher(object):
+    def __init__(self: 'AESCipher', key: str) -> None:
+        self.bs = AES.block_size
+        self.key = hashlib.sha256(key.encode()).digest()
 
-def encrypt(raw):
-    BS = AES.block_size
-    pad = lambda s: s + (BS - len(s) % BS) * chr(BS - len(s) % BS)
+    def encrypt(self: "AESCipher", raw: str) -> str:
+        raw = self._pad(raw)
+        iv = Random.new().read(AES.block_size)
+        cipher = AES.new(self.key, AES.MODE_CBC, iv)
+        return base64.b64encode(iv + cipher.encrypt(raw.encode())).decode('utf-8')
 
-    raw = base64.b64encode(pad(raw).encode('utf8'))
-    iv = get_random_bytes(AES.block_size)
-    cipher = AES.new(key= __key__, mode= AES.MODE_CFB,iv= iv)
-    return base64.b64encode(iv + cipher.encrypt(raw))
+    def decrypt(self: 'AESCipher', enc: bytes) -> str:
+        enc = base64.b64decode(enc)
+        iv = enc[:AES.block_size]
+        cipher = AES.new(self.key, AES.MODE_CBC, iv)
+        return self._unpad(cipher.decrypt(enc[AES.block_size:]))
 
-def decrypt(enc):
-    unpad = lambda s: s[:-ord(s[-1:])]
+    def _pad(self: 'AESCipher', s: str) -> str:
+        return s + (self.bs - len(s) % self.bs) * chr(self.bs - len(s) % self.bs)
 
-    enc = base64.b64decode(enc)
-    iv = enc[:AES.block_size]
-    cipher = AES.new(__key__, AES.MODE_CFB, iv)
-    return unpad(base64.b64decode(cipher.decrypt(enc[AES.block_size:])).decode('utf8'))
+    @staticmethod
+    def _unpad(s: str) -> str:
+        return s[:-ord(s[len(s)-1:])]
 
 if __name__ == '__main__':
-    print('AES Encryption')
-    print('--------------')
-    print('Enter text to encrypt:')
-    text = input()
-    encrypted = encrypt(text)
-    print('Encrypted text:')
+    cipher = AESCipher('secret key')
+    encrypted = cipher.encrypt('secret message')
+    decrypted = cipher.decrypt(encrypted)
     print(encrypted)
-    print('Decrypted text:')
-    print(decrypt(encrypted))
+    print(decrypted)
