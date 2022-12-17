@@ -1,6 +1,6 @@
 # AES Encryption
 
-[![Downloads](https://static.pepy.tech/personalized-badge/cachier-common-library?period=total&units=none&left_color=grey&right_color=green&left_text=Downloads)](https://pepy.tech/project/aes-encryption)
+[![Downloads](https://static.pepy.tech/personalized-badge/aes-encryption?period=total&units=international_system&left_color=grey&right_color=blue&left_text=Downloads)](https://pepy.tech/project/aes-encryption)
 
 A python aes encryption library
 
