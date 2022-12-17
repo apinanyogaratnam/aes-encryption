@@ -1,5 +1,7 @@
 # AES Encryption
 
+[![Downloads](https://static.pepy.tech/personalized-badge/cachier-common-library?period=total&units=none&left_color=grey&right_color=green&left_text=Downloads)](https://pepy.tech/project/cachier-common-library)
+
 A python aes encryption library
 
 ## Table of Contents
