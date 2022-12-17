@@ -1,5 +1,5 @@
-from aes_encryption.main import greetings
+from aes_encryption.main import AESCipher
 
 __all__ = [
-    greetings,
+    AESCipher,
 ]
